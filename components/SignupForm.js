@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import { View, Text } from "react-native";
 import { FormLabel, FormInput, Button } from "react-native-elements";
+import axios from 'axios';
+
+// root URL path
+// do this if most of the JS file here is going to same URL root or declare them and use backtics to go to function /..
+const ROOT_URL = 'https://us-central1-one-time-password-fd380.cloudfunctions.net';
 
 class SignupForm extends Component {
     // old syntax
@@ -19,7 +24,19 @@ class SignupForm extends Component {
     // above is traditional for the handler but below is new syntax
     // but with above you have to call bind(this) in button
     handleSubmit = () => {
-
+        // now need to make network call to google service
+        // can use fetch() function built into react native but it has some weird stuff so guy prefers axios
+        // post request to URL
+        // second argument is an object to post
+        axios.post(`${ROOT_URL}/createUser`, {
+            phone: this.state.phone
+        })
+            .then(() => {
+                axios.post(`${ROOT_URL}/requestOneTimePassword`, { phone: this.state.phone });
+                // can tack on a .then here too since its a promise if you want to do things with the returned stuff
+                // or even a .catch for error handling
+            })
+            .catch();
     }
 
     render() {
@@ -28,13 +45,13 @@ class SignupForm extends Component {
                 <View style={{ marginBottom: 10 }}>
                     <FormLabel>Enter Phone Number</FormLabel>
                     <FormInput
-                        value={ this.state.phone }
-                        onChangeText={ phone => this.setState({ phone }) }
-                        // above same as phone: phone
+                        value={this.state.phone}
+                        onChangeText={phone => this.setState({ phone })}
+                    // above same as phone: phone
                     />
                 </View>
-                
-                <Button onPress={ this.handleSubmit.bind(this) } title="Submit" />
+
+                <Button onPress={this.handleSubmit} title="Submit" />
             </View>
         );
     }
