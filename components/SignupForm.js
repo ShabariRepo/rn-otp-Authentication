@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Image } from "react-native";
 import { FormLabel, FormInput, Button } from "react-native-elements";
 import axios from 'axios';
 
@@ -41,7 +41,7 @@ class SignupForm extends Component {
 
     render() {
         return (
-            <View>
+            <View style={{ backgroundColor: '#fff' }}>
                 <View style={{ marginBottom: 10 }}>
                     <FormLabel>Enter Phone Number</FormLabel>
                     <FormInput
@@ -51,7 +51,10 @@ class SignupForm extends Component {
                     />
                 </View>
 
-                <Button onPress={this.handleSubmit} title="Submit" />
+                <View style={{ paddingBottom: 10 }}>
+                    <Button onPress={this.handleSubmit} title="Submit" />
+                </View>
+                <Image source={require('../assets/forSale.png')} />
             </View>
         );
     }
