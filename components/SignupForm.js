@@ -6,8 +6,11 @@ class SignupForm extends Component {
     render() {
         return (
             <View>
-                <FormLabel>Enter Phone Number</FormLabel>
-                <FormInput />
+                <View style={{ marginBottom: 10 }}>
+                    <FormLabel>Enter Phone Number</FormLabel>
+                    <FormInput />
+                </View>
+                
                 <Button title="Submit" />
             </View>
         );
