@@ -23,20 +23,20 @@ class SignupForm extends Component {
     // }
     // above is traditional for the handler but below is new syntax
     // but with above you have to call bind(this) in button
-    handleSubmit = () => {
+    handleSubmit = async () => {
         // now need to make network call to google service
         // can use fetch() function built into react native but it has some weird stuff so guy prefers axios
         // post request to URL
         // second argument is an object to post
-        axios.post(`${ROOT_URL}/createUser`, {
-            phone: this.state.phone
-        })
-            .then(() => {
-                axios.post(`${ROOT_URL}/requestOneTimePassword`, { phone: this.state.phone });
-                // can tack on a .then here too since its a promise if you want to do things with the returned stuff
-                // or even a .catch for error handling
-            })
-            .catch();
+
+        // new syntax async & await
+        // to handle a .catch with this syntax wrap with try/catch
+        try{
+            await axios.post(`${ROOT_URL}/createUser`, { phone: this.state.phone })
+            await axios.post(`${ROOT_URL}/requestOneTimePassword`, { phone: this.state.phone });
+        } catch(err) {
+            console.log(err);
+        }
     }
 
     render() {
