@@ -22,7 +22,7 @@ class SignInForm extends Component {
 
     render() {
         return (
-            <View style={{ backgroundColor: '#fff' }}>
+            <View style={{ backgroundColor: '#ddd3ee', marginHorizontal: 10 }}>
                 <View style={{ marginBottom: 10 }}>
                     <FormLabel>Enter Phone Number</FormLabel>
                     <FormInput

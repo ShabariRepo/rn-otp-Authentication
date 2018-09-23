@@ -54,7 +54,6 @@ class SignupForm extends Component {
                 <View style={{ paddingBottom: 10 }}>
                     <Button onPress={this.handleSubmit} title="Submit" />
                 </View>
-                <Image source={require('../assets/forSale.png')} />
             </View>
         );
     }
